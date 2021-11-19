@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['initials'];
+
+    public function getInitialsAttribute() {
+        $arr = explode(' ', trim($this->name));
+
+        return count($arr) > 1
+            ? $arr[0][0] . $arr[count($arr) - 1][0]
+            : $arr[0][0];
+    }
 }
