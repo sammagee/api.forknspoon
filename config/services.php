@@ -14,6 +14,12 @@ return [
     |
     */
 
+    'edamam' => [
+        'base_url' => 'https://api.edamam.com',
+        'app_id' => env('EDAMAM_APP_ID'),
+        'app_key' => env('EDAMAM_APP_KEY'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
