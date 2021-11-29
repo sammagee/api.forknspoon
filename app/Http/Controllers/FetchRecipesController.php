@@ -24,11 +24,13 @@ class FetchRecipesController extends Controller
             'diet' => $request->get('diets'),
             'health' => $request->get('restrictions'),
             'mealType' => $request->get('mealTypes'),
-            'random' => true,
-            'q' => 'recipe',
+            'random' => 'true',
+            'q' => $request->get('search') ?? 'recipe',
             'type' => 'public',
         ];
+        $url = $baseUrl.'/api/recipes/v2?'.http_build_query($queryStringParams);
 
-        return Http::get($baseUrl.'/api/recipes/v2?'.http_build_query($queryStringParams))->json();
+        return collect(Http::get($url)->json()['hits'])
+            ->map(fn($hit) => $hit['recipe']);
     }
 }
