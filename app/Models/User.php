@@ -56,4 +56,9 @@ class User extends Authenticatable
             ? $arr[0][0] . $arr[count($arr) - 1][0]
             : $arr[0][0];
     }
+
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class);
+    }
 }
