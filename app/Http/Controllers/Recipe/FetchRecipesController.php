@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Recipe;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -15,7 +16,15 @@ class FetchRecipesController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $baseUrl = config('services.edamam.base_url');
+        $url = $this->buildRequestUrl($request);
+
+        return collect(Http::get($url)->json()['hits'])
+            ->map(fn($hit) => $hit['recipe']);
+    }
+
+    protected function buildRequestUrl(Request $request)
+    {
+        $baseUrl = config('services.edamam.base_url') . '/api/recipes/v2?';
 
         $queryStringParams = [
             'app_id' => config('services.edamam.app_id'),
@@ -28,9 +37,7 @@ class FetchRecipesController extends Controller
             'q' => $request->get('search') ?? 'recipe',
             'type' => 'public',
         ];
-        $url = $baseUrl.'/api/recipes/v2?'.http_build_query($queryStringParams);
 
-        return collect(Http::get($url)->json()['hits'])
-            ->map(fn($hit) => $hit['recipe']);
+        return $baseUrl . http_build_query($queryStringParams);
     }
 }
