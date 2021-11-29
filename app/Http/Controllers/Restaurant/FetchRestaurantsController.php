@@ -20,8 +20,9 @@ class FetchRestaurantsController extends Controller
 
         return collect(Http::get($url)->json()['results'])
             ->map(fn($result) => [
-                'name' => $result['name'],
                 'image' => $this->buildPhotoRequestUrl($result['photos'][0]['photo_reference']),
+                'name' => $result['name'],
+                'place_id' => $result['place_id'],
             ]);
     }
 
@@ -42,7 +43,7 @@ class FetchRestaurantsController extends Controller
             'keyword' => implode(' ', $keywords),
             'location' => $request->get('location'),
             'radius' => 15000,
-            'type' => 'restaurant',
+            'type' => 'food',
         ];
 
         return $baseUrl . http_build_query($queryStringParams);
