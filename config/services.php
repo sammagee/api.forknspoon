@@ -20,6 +20,11 @@ return [
         'app_key' => env('EDAMAM_APP_KEY'),
     ],
 
+    'google_places' => [
+        'base_url' => 'https://maps.googleapis.com/maps/api/place',
+        'key' => env('GOOGLE_PLACES_KEY'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

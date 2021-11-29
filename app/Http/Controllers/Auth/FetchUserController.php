@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FetchSavedRecipesController extends Controller
+class FetchUserController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -14,6 +15,6 @@ class FetchSavedRecipesController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return $request->user()->recipes()->orderByDesc('updated_at')->get();
+        return $request->user();
     }
 }

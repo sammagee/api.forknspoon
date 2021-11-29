@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Recipe;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class SaveRecipeController extends Controller
