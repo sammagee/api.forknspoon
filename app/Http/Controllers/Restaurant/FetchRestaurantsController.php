@@ -43,7 +43,7 @@ class FetchRestaurantsController extends Controller
             'keyword' => implode(' ', $keywords),
             'location' => $request->get('location'),
             'radius' => 15000,
-            'type' => 'food',
+            'type' => 'restaurant',
         ];
 
         return $baseUrl . http_build_query($queryStringParams);
