@@ -19,6 +19,7 @@ class FetchRecipesController extends Controller
         $url = $this->buildRequestUrl($request);
 
         return collect(Http::get($url)->json()['hits'])
+            ->shuffle()
             ->map(fn($hit) => $hit['recipe']);
     }
 

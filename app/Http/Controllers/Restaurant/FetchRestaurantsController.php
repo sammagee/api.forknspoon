@@ -19,6 +19,7 @@ class FetchRestaurantsController extends Controller
         $url = $this->buildRequestUrl($request);
 
         return collect(Http::get($url)->json()['results'])
+            ->shuffle()
             ->map(fn($result) => [
                 'image' => $this->buildPhotoRequestUrl($result['photos'][0]['photo_reference']),
                 'name' => $result['name'],
