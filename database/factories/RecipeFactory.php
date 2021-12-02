@@ -22,7 +22,12 @@ class RecipeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'calories' => $this->faker->randomFloat(),
+            'image' => $this->faker->imageUrl(1920, 1080, word: 'Recipe'),
+            'label' => $this->faker->sentence(),
+            'total_time' => $this->faker->numberBetween(0, 120),
+            'url' => $this->faker->url(),
+            'yield' => $this->faker->randomDigitNotNull(),
         ];
     }
 }
